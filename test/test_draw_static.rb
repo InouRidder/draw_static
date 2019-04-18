@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'rails'
 require 'draw_static'
 require_relative 'draw_static_tests_controller'
+require 'pry'
 
 class DrawStaticTest < Minitest::Test
   def test_route_from_action
@@ -25,14 +26,15 @@ class DrawStaticTest < Minitest::Test
       draw_static :draw_static_tests
     end
     assert_equal Rails.application.routes.set.count, 4
-    test_if_router_includes_tests_controller_actions
+    test_if_routes_includes_tests_controller_actions
   end
 
   private
 
-  def test_if_router_includes_tests_controller_actions
-    Rails.application.routes.set.each do |route|
-      assert_includes DrawStaticTestsController.instance_methods(false), route.name.to_sym
+  def test_if_routes_includes_tests_controller_actions
+    routes = DrawStaticTestsController.instance_methods(false).map { |action| StaticRoutes.route_from_action(action) }
+    routes.each do |route|
+      assert_equal !!Rails.application.routes.recognize_path(route), true
     end
   end
 end
