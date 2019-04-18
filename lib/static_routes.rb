@@ -5,7 +5,7 @@ class StaticRoutes
     end
 
     def controller_from_chars(chars)
-      "#{chars.to_s.capitalize}Controller".constantize
+      "#{chars.to_s.camelize}Controller".constantize
     end
 
     def for(controller, context)
