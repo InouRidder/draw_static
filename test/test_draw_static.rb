@@ -1,8 +1,7 @@
-require 'minitest/autorun'
-require 'rails'
-require 'draw_static'
+require 'rails/all'
 require_relative 'draw_static_tests_controller'
-require 'pry'
+require 'minitest/autorun'
+require 'draw_static'
 
 class DrawStaticTest < Minitest::Test
   def test_route_from_action

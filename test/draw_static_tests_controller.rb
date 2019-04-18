@@ -1,4 +1,6 @@
-class DrawStaticTestsController
+class DrawStaticTestsController < ActionController::Base
+  before_action :home, :do_nothing
+
   def home
   end
 
@@ -9,5 +11,13 @@ class DrawStaticTestsController
   end
 
   def about_us
+  end
+
+  private
+
+  def do_nothing
+  end
+
+  def not_to_be_included
   end
 end
