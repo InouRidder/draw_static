@@ -1,4 +1,6 @@
-# A gem for rails avoid repetition in writing static routes
+# draw_static
+
+### Cleaning up your static routes in rails.
 
 ```
 get 'home', to: 'pages#home'
@@ -14,20 +16,20 @@ Add
 # Gemfile
 gem 'draw_static'
 ```
-To the Gemfile and run bundle install
+To the Gemfile and run bundle install, then add
 
 ```
 # routes.rb
 
 Rails.application.routes.draw do
-  draw_static :pages
+  draw_static :pages # Or which controller you are using for static routes
 end
 ```
 
 This set up will generate the static routes based on the controller actions.
 In this case we are generating the routes for the PagesController, if you want to do it for your PublicPagesController then you would pass: :public_pages
 
-disclaimer: The controller action has to be the same name as the route. All non-word characters in the controller actions name are replaced by hyphens.
+disclaimer: The controller action has to be the same name as the path. All non-word characters in the controller actions name are replaced by hyphens in the path.
 e.g.
 ```
 def about_us
