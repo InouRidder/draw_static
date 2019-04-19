@@ -29,8 +29,9 @@ end
 This set up will generate the static routes based on the controller actions.
 In this case we are generating the routes for the PagesController, if you want to do it for your PublicPagesController then you would pass: :public_pages
 
-disclaimer: The controller action has to be the same name as the path. All non-word characters in the controller actions name are replaced by hyphens in the path.
-e.g.
+The controller action has to be the same name as the path. All non-word characters in the controller actions name are replaced by hyphens in the path.
+
+e.g
 ```
 def about_us
 end
