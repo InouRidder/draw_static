@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'draw_static'
-  s.version     = '0.0.3'
-  s.date        = '2019-04-18'
+  s.version     = '0.0.4'
+  s.date        = '2019-04-20'
   s.summary     = 'Draw static routes'
   s.add_runtime_dependency 'rails', '~> 5.0', '> 5.0'
   s.description = 'A gem to avoid repitition in your rails routes file'
