@@ -46,5 +46,5 @@ get 'about-us', to: 'pages#about_us'
 
 # Rails
 
-draw_static is based on rails, read more about the rails frame work here
+draw_static is a gem for the rails framework, read more about the rails frame work here
 https://github.com/rails/rails
