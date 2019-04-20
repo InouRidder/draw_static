@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails/all'
 require_relative 'draw_static_tests_controller'
 require 'minitest/autorun'
@@ -5,9 +7,9 @@ require 'draw_static'
 
 class DrawStaticTest < Minitest::Test
   def test_route_from_action
-    assert_equal "my-home-page", StaticRoutes.route_from_action("my_home_page")
-    assert_equal "hyphenized-pages-are-great", StaticRoutes.route_from_action("hyphenized2pages$are(great")
-    assert_equal "iFcknLove-hyphens", StaticRoutes.route_from_action("iFcknLove9hyphens")
+    assert_equal 'my-home-page', StaticRoutes.route_from_action('my_home_page')
+    assert_equal 'hyphenized-pages-are-great', StaticRoutes.route_from_action('hyphenized2pages$are(great')
+    assert_equal 'iFcknLove-hyphens', StaticRoutes.route_from_action('iFcknLove9hyphens')
   end
 
   def test_controller_from_action

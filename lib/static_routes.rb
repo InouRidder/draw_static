@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class StaticRoutes
   class << self
     def route_from_action(action)
-      action.to_s.gsub(/[^a-zA-Z]/, "-")
+      action.to_s.gsub(/[^a-zA-Z]/, '-')
     end
 
     def controller_from_chars(chars)
