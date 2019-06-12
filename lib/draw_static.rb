@@ -4,9 +4,8 @@ require_relative 'static_routes'
 
 module DrawStatic
   def draw_static(*controllers)
-    controllers.each do |controller|
-      StaticRoutes.for(controller, self)
-    end
+    StaticRoutes.context = self
+    StaticRoutes.for(controllers)
   end
 end
 

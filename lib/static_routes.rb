@@ -2,6 +2,9 @@
 
 class StaticRoutes
   class << self
+    attr_accessor :context
+    @limits= {}
+
     def route_from_action(action)
       action.to_s.gsub(/[^a-zA-Z]/, '-')
     end
@@ -10,9 +13,22 @@ class StaticRoutes
       "#{chars.to_s.camelize}Controller".constantize
     end
 
-    def for(controller, context)
+    def desired_routes_from_actions(controller)
+      @limits[:only] || controller.instance_methods(false).reject { |route| @limits[:except].include?(route) }
+    end
+
+    def for(controllers)
+      controllers, @limits = controllers[0..-2], controllers.last if controller.last.is_a? Hash
+      controllers.each do |controller|
+        write_routes_for(controller)
+      end
+    end
+
+    private
+
+    def write_routes_for(controller, args)
       controller_constant = controller_from_chars(controller)
-      controller_constant.instance_methods(false).each do |action|
+      desired_routes_from_actions(controller, args).each do |action|
         context.get(route_from_action(action), to: "#{controller}##{action}")
       end
     end
