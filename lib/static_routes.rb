@@ -20,11 +20,11 @@ class StaticRoutes
     limits[:only] || instance_methods.reject do |route|
       limits[:except]&.include?(route)
     end
+    # check_if_only_is_alreadyd_drawn!
   end
 
   def for(arguments)
     controllers = split_controllers_and_limits(arguments)
-    # PROBLEM: If only is specified but multiple controllers, the route
     controllers.each do |controller|
       write_routes_for(controller)
     end
