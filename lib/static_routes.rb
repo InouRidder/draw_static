@@ -17,10 +17,13 @@ class StaticRoutes
 
   def desired_routes_from(controller)
     instance_methods = controller.instance_methods(false)
-    limits[:only] || instance_methods.reject do |route|
-      limits[:except]&.include?(route)
+    if limits[:only]
+      limits[:only].select { |method| instance_methods.include?(method) }
+    else
+      instance_methods.reject do |route|
+        limits[:except]&.include?(route)
+      end
     end
-    # check_if_only_is_alreadyd_drawn!
   end
 
   def for(arguments)
