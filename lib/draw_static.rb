@@ -3,9 +3,9 @@
 require_relative 'static_routes'
 
 module DrawStatic
-  def draw_static(*controllers)
-    StaticRoutes.context = self
-    StaticRoutes.for(controllers)
+  def draw_static(*arguments)
+    generator = StaticRoutes.new(context: self)
+    generator.for(arguments)
   end
 end
 
