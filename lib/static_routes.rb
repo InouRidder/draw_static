@@ -27,7 +27,7 @@ class StaticRoutes
   end
 
   def for(arguments)
-    controllers = split_controllers_and_limits(arguments)
+    splice_limits(arguments)
     controllers.each do |controller|
       write_routes_for(controller)
     end
@@ -35,12 +35,10 @@ class StaticRoutes
 
   private
 
-  def split_controllers_and_limits(arguments)
-    if arguments.last.is_a? Hash
-      self.limits = arguments.last
-      return arguments[0..-2]
-    end
-    arguments
+  def splice_limits(arguments)
+    return unless arguments.last.is_a? Hash
+
+    self.limits = arguments.last
   end
 
   def write_routes_for(controller)
