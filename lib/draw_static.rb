@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'static_routes'
+require_relative 'module_finder'
 
 module DrawStatic
   def draw_static(*arguments)
@@ -10,7 +11,7 @@ module DrawStatic
   end
 
   def prefixed_modules
-    instance_variable_get('@scope')&.instance_variable_get('@hash')&.try(:[], :module)
+    ModuleFinder.dig(self)
   end
 end
 

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# get all seperate modules + controller
-# join by ::
 class StaticRoutes
   attr_accessor :context, :limits, :prefixed_modules
   def initialize(attributes = {})
