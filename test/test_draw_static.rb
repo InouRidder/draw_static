@@ -3,19 +3,20 @@
 require 'rails/all'
 require_relative 'draw_static_tests_controller'
 require_relative 'second_tests_controller'
+require_relative 'namespaced_controller'
 require 'minitest/autorun'
 require_relative '../lib/draw_static'
 require 'pry'
 
 class DrawStaticTest < Minitest::Test
   def test_route_from_action
-    assert_equal 'my-home-page', StaticRoutes.new.route_from_action('my_home_page')
-    assert_equal 'hyphenized-pages-are-great', StaticRoutes.new.route_from_action('hyphenized2pages$are(great')
-    assert_equal 'iFcknLove-hyphens', StaticRoutes.new.route_from_action('iFcknLove9hyphens')
+    assert_equal 'my-home-page', StaticRoutes.new.send(:route_from_action, 'my_home_page')
+    assert_equal 'hyphenized-pages-are-great', StaticRoutes.new.send(:route_from_action, 'hyphenized2pages$are(great')
+    assert_equal 'iFcknLove-hyphens', StaticRoutes.new.send(:route_from_action, 'iFcknLove9hyphens')
   end
 
   def test_controller_from_action
-    assert_equal DrawStaticTestsController, StaticRoutes.new.controller_from_chars(:draw_static_tests)
+    assert_equal DrawStaticTestsController, StaticRoutes.new.send(:controller_from_chars, :draw_static_tests)
   end
 
   module DrawStaticTestApp
@@ -72,6 +73,18 @@ class DrawStaticTest < Minitest::Test
     end
     assert_equal 6, Rails.application.routes.set.count
     route_presence(false, [:home])
+  end
+
+  def test_with_namespaced_route
+    Rails.application.routes.draw do
+      namespace :v1 do
+        namespace :api do
+          draw_static :namespaced
+        end
+      end
+    end
+
+    route_presence(true, [:v1_api_home])
   end
 
   private
