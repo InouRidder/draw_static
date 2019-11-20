@@ -7,10 +7,10 @@ module DrawStatic
   def draw_static(*arguments)
     generator = StaticRoutes.new(context: self)
 
-    generator.for(arguments: arguments, prefixed_modules: get_prefixed_modules)
+    generator.for(arguments: arguments, prefixed_modules: prefixed_modules)
   end
 
-  def get_prefixed_modules
+  def prefixed_modules
     instance_variable_get('@scope')&.instance_variable_get('@hash')&.try(:[], :module)
   end
 end
